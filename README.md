@@ -1,4 +1,5 @@
 # Deployr
+just spec at this point
 
 ### What?
 deployr allows quickly bootstrapping a deployment server that listens to github web hooks
