@@ -1,10 +1,10 @@
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-import chalk from 'chalk';
-import express from 'express';
-import bodyParser from 'body-parser';
-import crypto from 'crypto';
-import git from 'git-promise';
+var chalk = require('chalk');
+var express = require('express');
+var bodyParser = require('body-parser');
+var crypto = require('crypto');
+var git = require('git-promise');
 
 var Deployr = function Deployr(_ref) {
     var _this = this;

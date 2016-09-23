@@ -1,8 +1,8 @@
-import chalk from 'chalk';
-import express from 'express';
-import bodyParser from 'body-parser';
-import crypto from 'crypto';
-import git from 'git-promise';
+const chalk = require('chalk');
+const express = require('express');
+const bodyParser = require('body-parser');
+const crypto = require('crypto');
+const git = require('git-promise');
 
 class Deployr {
 
