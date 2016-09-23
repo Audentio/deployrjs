@@ -1,11 +1,8 @@
 # Deployr
-just spec at this point
 
 ### What?
 deployr allows quickly bootstrapping a deployment server that listens to github web hooks
 and does whatever you want whenever an action occurs. This includes system commands and/or arbitrary JS
-
-*Requirements:* git, nodejs
 
 ### How?
 
