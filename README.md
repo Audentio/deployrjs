@@ -18,22 +18,32 @@ const Deployr = require('deployr');
 const deployment = new Deployr({
     key: #####, // this is your github secret key
     port: 4000, // port to listen on
-    path: 'deploy', // listener's path (http://yoursite.com:PORT/deploy)
 });
 ```
 
 **3. take over the planet**
 ```javascript
-deployment.listen()
-    .then(action => {
-        // At this point "git reset --hard" and "git pull" have finished executing
-        // the folder now have
-        if (action.type === 'push') {
-            myBuildFunction();
-        }
-    })
-    .then(anotherFunction)
-    .then(() => {
-        console.log('Woot!');
-    });
+const exec = require('child-process-promise').exec;
+
+deployment.listen((action, pull) => {
+    if (action.type !== 'push') return;
+
+    pull()
+        .then(() => {
+            // At this point, files are identical to git repo
+            // Let's re-run a build script
+
+            console.log('Running build script...');
+            return exec('npm run build');
+        })
+
+        .then(mySynchronousFunction)
+
+        .catch(err =>
+            console.error('failed!');
+        );
+});
 ```
+
+use Promise wrappers for async functions.
+e.g. https://www.npmjs.com/package/fs-promise
