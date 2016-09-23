@@ -11,19 +11,19 @@ and does whatever you want whenever an action occurs. This includes system comma
 
 **1. Install** `npm install --save git+ssh://git@github.com:Audentio/deployr.git`
 
-**2. Create deployr instance**
+**2. take over the planet**
 ```javascript
 const Deployr = require('deployr');
+const exec = require('child-process-promise').exec;
 
 const deployment = new Deployr({
-    key: #####, // this is your github secret key
-    port: 4000, // port to listen on
-});
-```
+    // this is your github secret key.
+    // Not passing this will disable verification
+    key: #####,
 
-**3. take over the planet**
-```javascript
-const exec = require('child-process-promise').exec;
+    // port to listen on
+    port: 4000,
+});
 
 deployment.listen((action, pull) => {
     if (action.type !== 'push') return;
@@ -36,8 +36,6 @@ deployment.listen((action, pull) => {
             console.log('Running build script...');
             return exec('npm run build');
         })
-
-        .then(mySynchronousFunction)
 
         .catch(err =>
             console.error('failed!');
