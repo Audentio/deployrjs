@@ -31,7 +31,10 @@ class Deployr {
 
                 // Key mismatch
                 // Likely bogus request. stop executing
-                if (req.headers['x-hub-signature'] !== sig) return;
+                if (req.headers['x-hub-signature'] !== sig) {
+                    this.log(chalk.red.bold('Github secret key verificiation failed!'));
+                    return;
+                }
             }
 
             // We're good to go
