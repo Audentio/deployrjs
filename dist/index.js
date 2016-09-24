@@ -6,12 +6,10 @@ var bodyParser = require('body-parser');
 var crypto = require('crypto');
 var git = require('git-promise');
 
-var Deployr = function Deployr(_ref) {
+var Deployr = function Deployr() {
     var _this = this;
 
-    var key = _ref.key;
-    var _ref$port = _ref.port;
-    var port = _ref$port === undefined ? 4000 : _ref$port;
+    var config = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
 
     _classCallCheck(this, Deployr);
 
@@ -77,8 +75,14 @@ var Deployr = function Deployr(_ref) {
     };
 
     this.log = function (message) {
-        console.log(chalk.gray('[deployrjs] ') + message);
+        console.log(chalk.gray('[deployr] ') + message);
     };
+
+    var _config$key = config.key;
+    var key = _config$key === undefined ? null : _config$key;
+    var _config$port = config.port;
+    var port = _config$port === undefined ? 4000 : _config$port;
+
 
     this.key = key;
     this.port = port;
