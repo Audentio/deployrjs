@@ -35,7 +35,10 @@ var Deployr = function Deployr(_ref) {
 
                 // Key mismatch
                 // Likely bogus request. stop executing
-                if (req.headers['x-hub-signature'] !== sig) return;
+                if (req.headers['x-hub-signature'] !== sig) {
+                    _this.log(chalk.red.bold('Github secret key verificiation failed!'));
+                    return;
+                }
             }
 
             // We're good to go
@@ -74,7 +77,7 @@ var Deployr = function Deployr(_ref) {
     };
 
     this.log = function (message) {
-        console.log(chalk.gray('[deployr] ') + message);
+        console.log(chalk.gray('[deployrjs] ') + message);
     };
 
     this.key = key;

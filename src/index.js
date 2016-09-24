@@ -76,7 +76,7 @@ class Deployr {
         })
 
     log = message => {
-        console.log(chalk.gray('[deployr] ') + message);
+        console.log(chalk.gray('[deployrjs] ') + message);
     }
 }
 
