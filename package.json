@@ -1,5 +1,5 @@
 {
-  "name": "deployr",
+  "name": "deployrjs",
   "version": "0.0.2",
   "description": "Automatic deployment with git",
   "main": "dist/index.js",
