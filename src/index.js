@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const crypto = require('crypto');
 const git = require('git-promise');
 
-class Deployr {
+class DeployrJS {
 
     constructor({ key, port = 4000 }) {
         this.key = key;
@@ -76,8 +76,8 @@ class Deployr {
         })
 
     log = message => {
-        console.log(chalk.gray('[deployr] ') + message);
+        console.log(chalk.gray('[deployrjs] ') + message);
     }
 }
 
-module.exports = Deployr;
+module.exports = DeployrJS;

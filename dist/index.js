@@ -6,14 +6,14 @@ var bodyParser = require('body-parser');
 var crypto = require('crypto');
 var git = require('git-promise');
 
-var Deployr = function Deployr(_ref) {
+var DeployrJS = function DeployrJS(_ref) {
     var _this = this;
 
     var key = _ref.key;
     var _ref$port = _ref.port;
     var port = _ref$port === undefined ? 4000 : _ref$port;
 
-    _classCallCheck(this, Deployr);
+    _classCallCheck(this, DeployrJS);
 
     this.listen = function (callback) {
         // Create express server
@@ -35,7 +35,10 @@ var Deployr = function Deployr(_ref) {
 
                 // Key mismatch
                 // Likely bogus request. stop executing
-                if (req.headers['x-hub-signature'] !== sig) return;
+                if (req.headers['x-hub-signature'] !== sig) {
+                    _this.log(chalk.red.bold('Github secret key verificiation failed!'));
+                    return;
+                }
             }
 
             // We're good to go
@@ -74,7 +77,7 @@ var Deployr = function Deployr(_ref) {
     };
 
     this.log = function (message) {
-        console.log(chalk.gray('[deployr] ') + message);
+        console.log(chalk.gray('[deployrjs] ') + message);
     };
 
     this.key = key;
@@ -86,4 +89,4 @@ var Deployr = function Deployr(_ref) {
 // to make sure we're identical to github repo
 ;
 
-module.exports = Deployr;
+module.exports = DeployrJS;

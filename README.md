@@ -1,19 +1,19 @@
-# Deployr
+# DeployrJS
 
 ### What?
-deployr allows quickly bootstrapping a deployment server that listens to github web hooks
+DeployrJS allows quickly bootstrapping a deployment server that listens to github web hooks
 and does whatever you want whenever an action occurs. This includes system commands and/or arbitrary JS
 
 ### How?
 
-**1. Install** `npm install --save git+ssh://git@github.com:Audentio/deployr.git`
+**1. Install** `npm install --save deployrjs`
 
 **2. take over the planet**
 ```javascript
-const Deployr = require('deployr');
+const DeployrJS = require('deployrjs');
 const exec = require('child-process-promise').exec;
 
-const deployment = new Deployr({
+const deployment = new DeployrJS({
     // this is your github secret key.
     // Not passing this will disable verification
     key: #####,
