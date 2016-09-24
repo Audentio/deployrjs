@@ -6,14 +6,14 @@ var bodyParser = require('body-parser');
 var crypto = require('crypto');
 var git = require('git-promise');
 
-var DeployrJS = function DeployrJS(_ref) {
+var Deployr = function Deployr(_ref) {
     var _this = this;
 
     var key = _ref.key;
     var _ref$port = _ref.port;
     var port = _ref$port === undefined ? 4000 : _ref$port;
 
-    _classCallCheck(this, DeployrJS);
+    _classCallCheck(this, Deployr);
 
     this.listen = function (callback) {
         // Create express server
@@ -89,4 +89,4 @@ var DeployrJS = function DeployrJS(_ref) {
 // to make sure we're identical to github repo
 ;
 
-module.exports = DeployrJS;
+module.exports = Deployr;

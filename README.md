@@ -10,10 +10,10 @@ and does whatever you want whenever an action occurs. This includes system comma
 
 **2. take over the planet**
 ```javascript
-const DeployrJS = require('deployrjs');
+const Deployr = require('deployrjs');
 const exec = require('child-process-promise').exec;
 
-const deployment = new DeployrJS({
+const deployment = new Deployr({
     // this is your github secret key.
     // Not passing this will disable verification
     key: #####,
