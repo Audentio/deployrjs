@@ -6,7 +6,9 @@ const git = require('git-promise');
 
 class Deployr {
 
-    constructor({ key, port = 4000 }) {
+    constructor(config = {}) {
+        const { key = null, port = 4000 } = config;
+
         this.key = key;
         this.port = port;
     }
