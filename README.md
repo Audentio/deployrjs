@@ -23,7 +23,7 @@ const deployment = new Deployr({
 });
 
 deployment.listen((action, pull) => {
-    if (action.type !== 'push') return;
+    // "action" is the object sent by github web hook
 
     pull()
         .then(() => {
