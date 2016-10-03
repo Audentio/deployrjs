@@ -1,4 +1,4 @@
-# DeployrJS
+<img src="https://cloud.githubusercontent.com/assets/1689818/19042025/0c44ffea-89a8-11e6-96c4-86fed4be8cdf.png" width="300">
 
 ### What?
 DeployrJS allows quickly bootstrapping a deployment server that listens to github web hooks
