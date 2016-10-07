@@ -7,10 +7,11 @@ const git = require('git-promise');
 class Deployr {
 
     constructor(config = {}) {
-        const { key = null, port = 4000 } = config;
+        const { key = null, port = 4000, memoryLimit = '10mb' } = config;
 
         this.key = key;
         this.port = port;
+        this.memoryLimit = memoryLimit;
     }
 
     listen = callback => {
@@ -19,8 +20,8 @@ class Deployr {
 
         // parse JSON
         // (Github web hooks send JSON)
-        app.use(bodyParser.urlencoded({ extended: false }));
-        app.use(bodyParser.json());
+        app.use(bodyParser.urlencoded({ limit: this.memoryLimit, extended: true }));
+        app.use(bodyParser.json({ limit: this.memoryLimit }));
 
         // handle POST requests
         app.post('*', (req, res) => {
