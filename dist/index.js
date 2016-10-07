@@ -19,8 +19,8 @@ var Deployr = function Deployr() {
 
         // parse JSON
         // (Github web hooks send JSON)
-        app.use(bodyParser.urlencoded({ extended: false }));
-        app.use(bodyParser.json());
+        app.use(bodyParser.urlencoded({ limit: _this.memoryLimit, extended: true }));
+        app.use(bodyParser.json({ limit: _this.memoryLimit }));
 
         // handle POST requests
         app.post('*', function (req, res) {
@@ -82,10 +82,13 @@ var Deployr = function Deployr() {
     var key = _config$key === undefined ? null : _config$key;
     var _config$port = config.port;
     var port = _config$port === undefined ? 4000 : _config$port;
+    var _config$memoryLimit = config.memoryLimit;
+    var memoryLimit = _config$memoryLimit === undefined ? '10mb' : _config$memoryLimit;
 
 
     this.key = key;
     this.port = port;
+    this.memoryLimit = memoryLimit;
 }
 
 // Get latest from github
