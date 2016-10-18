@@ -62,10 +62,12 @@ var Deployr = function Deployr() {
         return new Promise(function (resolve, reject) {
             _this.log('Git: start');
 
-            exec('git reset --hard').then(exec('git pull')).then(function () {
+            exec('git reset --hard').then(function () {
+                return exec('git pull');
+            }).then(function () {
                 _this.log('Git: finished');
                 resolve();
-            }).fail(function (err) {
+            }).catch(function (err) {
                 console.log(err.stdout);
                 reject(err);
             });

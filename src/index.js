@@ -67,12 +67,12 @@ class Deployr {
             this.log('Git: start');
 
             exec('git reset --hard')
-                .then(exec('git pull'))
+                .then(() => exec('git pull'))
                 .then(() => {
                     this.log('Git: finished');
                     resolve();
                 })
-                .fail(err => {
+                .catch(err => {
                     console.log(err.stdout);
                     reject(err);
                 });
