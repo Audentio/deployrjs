@@ -4,7 +4,7 @@ var chalk = require('chalk');
 var express = require('express');
 var bodyParser = require('body-parser');
 var crypto = require('crypto');
-var git = require('git-promise');
+var exec = require('child-process-promise').exec;
 
 var Deployr = function Deployr() {
     var _this = this;
@@ -62,9 +62,7 @@ var Deployr = function Deployr() {
         return new Promise(function (resolve, reject) {
             _this.log('Git: start');
 
-            git('reset --hard').then(function () {
-                return git('pull');
-            }).then(function () {
+            exec('git reset --hard').then(exec('git pull')).then(function () {
                 _this.log('Git: finished');
                 resolve();
             }).fail(function (err) {
