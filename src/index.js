@@ -2,7 +2,7 @@ const chalk = require('chalk');
 const express = require('express');
 const bodyParser = require('body-parser');
 const crypto = require('crypto');
-const git = require('git-promise');
+const exec = require('child-process-promise').exec;
 
 class Deployr {
 
@@ -66,13 +66,13 @@ class Deployr {
         new Promise((resolve, reject) => {
             this.log('Git: start');
 
-            git('reset --hard')
-                .then(() => git('pull'))
+            exec('git reset --hard')
+                .then(() => exec('git pull'))
                 .then(() => {
                     this.log('Git: finished');
                     resolve();
                 })
-                .fail(err => {
+                .catch(err => {
                     console.log(err.stdout);
                     reject(err);
                 });
