@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-const SlackInterface = (webhook_url, { username, channel }) => ({
+const SlackInterface = (webhook_url, { username, channel } = {}) => ({
     post: text => {
         fetch(webhook_url, {
             method: 'POST',
