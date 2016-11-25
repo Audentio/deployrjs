@@ -1,6 +1,6 @@
 {
   "name": "deployrjs",
-  "version": "0.0.28",
+  "version": "0.0.3",
   "description": "Automatic deployment with git",
   "main": "dist/index.js",
   "license": "MIT",
