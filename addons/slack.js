@@ -15,3 +15,5 @@ const SlackInterface = (webhook_url, { username, channel }) => ({
         });
     }
 });
+
+module.exports = SlackInterface;
