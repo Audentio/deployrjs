@@ -9,7 +9,7 @@ var exec = require('child-process-promise').exec;
 var Deployr = function Deployr() {
     var _this = this;
 
-    var config = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+    var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
     _classCallCheck(this, Deployr);
 
@@ -43,7 +43,7 @@ var Deployr = function Deployr() {
             console.log(chalk.gray('-----------------------------------'));
             _this.log(chalk.yellow.bold('✨  Starting deployment...'));
 
-            callback(req, _this.pull);
+            callback(req.body, _this.pull);
 
             res.send('deploying');
         });
@@ -54,7 +54,7 @@ var Deployr = function Deployr() {
                 return;
             }
 
-            _this.log('🌐  Listening on port ' + _this.port);
+            _this.log('\uD83C\uDF10  Listening on port ' + _this.port);
         });
     };
 
@@ -78,12 +78,12 @@ var Deployr = function Deployr() {
         console.log(chalk.gray('[deployr] ') + message);
     };
 
-    var _config$key = config.key;
-    var key = _config$key === undefined ? null : _config$key;
-    var _config$port = config.port;
-    var port = _config$port === undefined ? 4000 : _config$port;
-    var _config$memoryLimit = config.memoryLimit;
-    var memoryLimit = _config$memoryLimit === undefined ? '10mb' : _config$memoryLimit;
+    var _config$key = config.key,
+        key = _config$key === undefined ? null : _config$key,
+        _config$port = config.port,
+        port = _config$port === undefined ? 4000 : _config$port,
+        _config$memoryLimit = config.memoryLimit,
+        memoryLimit = _config$memoryLimit === undefined ? '10mb' : _config$memoryLimit;
 
 
     this.key = key;
