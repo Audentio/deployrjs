@@ -44,7 +44,7 @@ class Deployr {
             console.log(chalk.gray('-----------------------------------'));
             this.log(chalk.yellow.bold('✨  Starting deployment...'));
 
-            callback(req, this.pull);
+            callback(req.body, this.pull);
 
             res.send('deploying');
         });
