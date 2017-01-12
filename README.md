@@ -20,6 +20,9 @@ const deployment = new Deployr({
 
     // port to listen on
     port: 4000,
+
+    // branch to deploy
+    branch: 'master',
 });
 
 deployment.listen((action, pull) => {
