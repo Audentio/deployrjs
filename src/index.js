@@ -7,11 +7,12 @@ const exec = require('child-process-promise').exec;
 class Deployr {
 
     constructor(config = {}) {
-        const { key = null, port = 4000, memoryLimit = '10mb' } = config;
+        const { key = null, port = 4000, memoryLimit = '10mb', branch = 'master' } = config;
 
         this.key = key;
         this.port = port;
         this.memoryLimit = memoryLimit;
+        this.branch = branch;
     }
 
     listen = callback => {
@@ -25,6 +26,11 @@ class Deployr {
 
         // handle POST requests
         app.post('*', (req, res) => {
+            const action = req.body;
+
+            if (action.ref !== `refs/heads/${this.branch}`) return; // check branch
+            if (!action.commits || !action.commits.length) return; // check if commits made
+
             if (this.key) {
                 // Verify SHA1 encrypted secret key
                 // This is to make sure no one can send a bogus requests

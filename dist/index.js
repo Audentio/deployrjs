@@ -24,6 +24,11 @@ var Deployr = function Deployr() {
 
         // handle POST requests
         app.post('*', function (req, res) {
+            var action = req.body;
+
+            if (action.ref !== 'refs/heads/' + _this.branch) return; // check branch
+            if (!action.commits || !action.commits.length) return; // check if commits made
+
             if (_this.key) {
                 // Verify SHA1 encrypted secret key
                 // This is to make sure no one can send a bogus requests
@@ -83,12 +88,15 @@ var Deployr = function Deployr() {
         _config$port = config.port,
         port = _config$port === undefined ? 4000 : _config$port,
         _config$memoryLimit = config.memoryLimit,
-        memoryLimit = _config$memoryLimit === undefined ? '10mb' : _config$memoryLimit;
+        memoryLimit = _config$memoryLimit === undefined ? '10mb' : _config$memoryLimit,
+        _config$branch = config.branch,
+        branch = _config$branch === undefined ? 'master' : _config$branch;
 
 
     this.key = key;
     this.port = port;
     this.memoryLimit = memoryLimit;
+    this.branch = branch;
 }
 
 // Get latest from github
