@@ -26,8 +26,8 @@ var Deployr = function Deployr() {
         app.post('*', function (req, res) {
             var action = req.body;
 
-            if (action.ref !== 'refs/heads/' + _this.branch) return; // check branch
-            if (!action.commits || !action.commits.length) return; // check if commits made
+            if (_this.branch && action.ref !== 'refs/heads/' + _this.branch) return; // check branch
+            if (_this.checkCommits && (!action.commits || !action.commits.length)) return; // check if commits made
 
             if (_this.key) {
                 // Verify SHA1 encrypted secret key
@@ -89,14 +89,16 @@ var Deployr = function Deployr() {
         port = _config$port === undefined ? 4000 : _config$port,
         _config$memoryLimit = config.memoryLimit,
         memoryLimit = _config$memoryLimit === undefined ? '10mb' : _config$memoryLimit,
-        _config$branch = config.branch,
-        branch = _config$branch === undefined ? 'master' : _config$branch;
+        branch = config.branch,
+        _config$checkCommits = config.checkCommits,
+        checkCommits = _config$checkCommits === undefined ? true : _config$checkCommits;
 
 
     this.key = key;
     this.port = port;
     this.memoryLimit = memoryLimit;
     this.branch = branch;
+    this.checkCommits = checkCommits;
 }
 
 // Get latest from github
