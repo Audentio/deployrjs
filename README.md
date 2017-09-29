@@ -6,12 +6,15 @@ and does whatever you want whenever an action occurs. This includes system comma
 
 ### How?
 
-**1. Install** `npm install --save deployrjs`
+**1. Install** `npm install --save deployrjs` or `yarn add deployrjs`
 
 **2. take over the planet**
 ```javascript
 const Deployr = require('deployrjs');
 const exec = require('child-process-promise').exec;
+
+/* optional: for slack notifications */
+const Slack = require('deployrjs/addons/slack')('https://hooks.slack.com/services/xxxxxx/xxxxxx/xxxxxx'); // Slack webhook URL
 
 const deployment = new Deployr({
     // this is your github secret key.
@@ -30,15 +33,19 @@ deployment.listen((action, pull) => {
 
     pull()
         .then(() => {
+            Slack.post('Deploying...');
+            
             // At this point, files are identical to git repo
             // Let's re-run a build script
-
-            console.log('Running build script...');
             return exec('npm run build');
+        })
+        
+        .then(() => {
+            Slack.post('Deployment successful!');
         })
 
         .catch(err =>
-            console.error('failed!');
+            Slack.post('Deployment failed!');
         );
 });
 ```
