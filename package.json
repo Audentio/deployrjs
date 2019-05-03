@@ -1,12 +1,12 @@
 {
   "name": "deployrjs",
-  "version": "0.0.34",
+  "version": "0.0.35",
   "description": "Automatic deployment with git",
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "build": "babel src/index.js --out-file dist/index.js",
-    "dev": "babel src/index.js --watch --out-file dist/index.js"
+    "build": "./node_modules/.bin/babel src/index.js --out-file dist/index.js",
+    "dev": "./node_modules/.bin/babel src/index.js --watch --out-file dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -32,7 +32,6 @@
     "body-parser": "^1.15.2",
     "chalk": "^1.1.3",
     "child-process-promise": "^2.1.3",
-    "crypto": "0.0.3",
     "express": "^4.14.0",
     "node-fetch": "^1.6.3"
   }

@@ -1,10 +1,9 @@
 <img src="https://cloud.githubusercontent.com/assets/1689818/19042025/0c44ffea-89a8-11e6-96c4-86fed4be8cdf.png" width="300">
 
-### What?
 DeployrJS allows quickly bootstrapping a deployment server that listens to github web hooks
 and does whatever you want whenever an action occurs. This includes system commands and/or arbitrary JS
 
-### How?
+### Setup
 
 **1. Install** `npm install --save deployrjs` or `yarn add deployrjs`
 
@@ -18,13 +17,14 @@ const Slack = require('deployrjs/addons/slack')('https://hooks.slack.com/service
 
 const deployment = new Deployr({
     // this is your github secret key.
-    // Not passing this will disable verification
-    key: #####,
+    // Not passing this will disable verification (less secure)
+    key: '#####',
 
     // port to listen on
     port: 4000,
 
-    // branch to deploy
+    // branch to deploy (optional)
+    // deploy only when this branch is updated
     branch: 'master',
 });
 

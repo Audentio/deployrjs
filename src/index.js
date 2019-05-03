@@ -29,9 +29,13 @@ class Deployr {
         app.post('*', (req, res) => {
             const action = req.body;
 
-            if (this.branch && action.ref !== `refs/heads/${this.branch}`) return; // check branch
-            if (this.checkCommits && (!action.commits || !action.commits.length)) return; // check if commits made
+            // check branch
+            if (this.branch && action.ref !== `refs/heads/${this.branch}`) return;
 
+            // check if commits were made
+            if (this.checkCommits && (!action.commits || !action.commits.length)) return; 
+
+            // key verification
             if (this.key) {
                 // Verify SHA1 encrypted secret key
                 // This is to make sure no one can send a bogus requests
@@ -40,7 +44,7 @@ class Deployr {
                 const sig = 'sha1=' + hmac.digest('hex');
 
                 // Key mismatch
-                // Likely bogus request. stop executing
+                // bogus request. stop executing
                 if (req.headers['x-hub-signature'] !== sig) {
                     this.log(chalk.red.bold('Github secret key verificiation failed!'));
                     return;
